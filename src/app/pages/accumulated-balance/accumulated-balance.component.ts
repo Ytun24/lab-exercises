@@ -23,8 +23,7 @@ export class AccumulatedBalanceComponent implements OnInit {
       .getEmployeeList()
       .pipe(
         map((employees) =>
-          employees.filter(
-            (employee: IEmployee) =>
+          employees.filter((employee: IEmployee) =>
             this.processProvidentFund(employee)
           )
         )
@@ -36,42 +35,41 @@ export class AccumulatedBalanceComponent implements OnInit {
 
   calculateProvidentFundMonths(startDateStr: string): number {
     const dateDiff = this.applicationService.findTimeDiff(startDateStr);
-    console.log(
-      dateDiff.getUTCFullYear() - 1970,
-      (dateDiff.getUTCFullYear() - 1970) * 12,
-      dateDiff.getUTCMonth()
-    ); 
     return (dateDiff.getUTCFullYear() - 1970) * 12 + dateDiff.getUTCMonth() - 3;
   }
 
   calculateAccumudatedBalances(
     salary: number,
     pvrate: number,
-    months: number,
+    months: number
   ): number {
     const rate = pvrate / 100;
-    const balance = (salary * rate) * months;
+    const balance = salary * rate * months;
     return balance;
   }
 
   processProvidentFund(employee: IEmployee) {
     if (employee.employeetype?.toLowerCase() === 'permanent') {
-      employee.pvfmonths = employee.startdate ? this.calculateProvidentFundMonths(employee.startdate): 0; 
+      employee.pvfmonths = employee.startdate
+        ? this.calculateProvidentFundMonths(employee.startdate)
+        : 0;
       employee.pvfbalances = {};
-      employee.pvfbalances.employeeBalances = employee.salary && employee.pvfrate && employee.pvfmonths
+      employee.pvfbalances.employeeBalances =
+        employee.salary && employee.pvfrate && employee.pvfmonths
           ? this.calculateAccumudatedBalances(
               employee.salary,
               employee.pvfrate,
               employee.pvfmonths
             )
           : 0;
-      employee.pvfbalances.companyBalances = employee.salary && employee.pvfmonths
-      ? this.calculateAccumudatedBalances(
-          employee.salary,
-          this.companyRate,
-          employee.pvfmonths
-        )
-      : 0;
+      employee.pvfbalances.companyBalances =
+        employee.salary && employee.pvfmonths
+          ? this.calculateAccumudatedBalances(
+              employee.salary,
+              this.companyRate,
+              employee.pvfmonths
+            )
+          : 0;
       return true;
     }
     return false;

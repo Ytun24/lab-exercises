@@ -13,7 +13,7 @@
         <th scope="col">Company <br> Accumulated Balances</th>
       </tr>
     </thead>
-    <tbody *ngFor="let employee of employees; let i = index">
+    <tbody *ngFor="let employee of employees;">
       <tr>
         <th scope="row">{{ employee.employeeid }}</th>
         <td>{{ employee.firstname }} {{ employee.lastname }}</td>
