@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { EmployeeListComponent } from './pages/employee-list/employee-list.component';
+import { AccumulatedBalanceComponent } from './pages/accumulated-balance/accumulated-balance.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     HeaderComponent,
     EmployeeListComponent,
+    AccumulatedBalanceComponent
   ],
   imports: [
     BrowserModule,
