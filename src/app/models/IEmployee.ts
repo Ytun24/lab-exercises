@@ -9,7 +9,9 @@ export class IEmployee {
   employeetype?: string;
   salary?: number;
   pvfrate?: number;
+  pvfcompanyrate?: number;
   pvfmonths?: number;
+  pvfyears?: number;
   pvfbalances?: IAccumulatedBalance;
 }
 
